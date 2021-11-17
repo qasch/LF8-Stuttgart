@@ -12,11 +12,10 @@ def index():
 # Wir können auch mehrere Routen für eine Funktion
 # angeben und zusätzlich Default Werte für Parameter
 # festlegen
-@app.route("/test/", defaults={'my_name': None})
-@app.route("/test/<string:my_name>")
-def test(my_name):
-    sum = my_name * 2
-    return render_template("test.html", my_name=escape(my_name))
+@app.route("/test/", defaults={'dest_url': None})
+@app.route("/test/<string:dest_url>/<from_url>")
+def test(dest_url, from_url):
+    return render_template("test.html", dest_url=escape(dest_url), from_url=from_url)
 
 
 # 'Main Methode', Startpunkt der Applikation

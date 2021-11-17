@@ -7,4 +7,5 @@ Flask App
 {% block content %}
 <h1>Unsere Erste Flask App</h1>
 <p>Jippiiee</p>
+<a href="{{ url_for('test', dest_url='gfn.de', from_url='index.html') }}">Test Seite</a>
 {% endblock %}

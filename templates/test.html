@@ -6,5 +6,7 @@ Test Seite
 
 {% block content %}
 <h1>Die Test Seite</h1>
-<p>Mein Name ist {{ my_name }}</p>
+<p>Verlinkung auf: <a href="https://{{ dest_url }}">{{ dest_url }}</a></p>
+<p>Aufgerufen von {{ from_url }} Seite</p>
+<a href="/">Home</a>
 {% endblock %}
