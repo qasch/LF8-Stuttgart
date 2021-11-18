@@ -1,12 +1,21 @@
 from flask import Flask, render_template
 from markupsafe import escape
+import sqlite3
 
 # Flask Objekt erzeugen
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    # Verbindung zur Datenbank herstellen
+    connection = sqlite3.connect('db/schule.db')
+    # Cursor erzeugen
+    cursor = connection.cursor()
+
+    # Cursor kann beliebige SQL Anweisungen ausführen
+    result = cursor.execute("SELECT * FROM Schueler").fetchall()
+
+    return render_template("index.html", result=result)
 
 
 # Wir können auch mehrere Routen für eine Funktion

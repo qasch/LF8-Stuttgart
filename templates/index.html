@@ -4,8 +4,48 @@
 Flask App
 {% endblock %}
 
-{% block content %}
-<h1>Unsere Erste Flask App</h1>
-<p>Jippiiee</p>
+{% block body %}
+<h1>Ausgabe der Tabelle Schueler</h1>
 <a href="{{ url_for('test', dest_url='gfn.de', from_url='index.html') }}">Test Seite</a>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">SNR</th>
+    <th scope="col">Vorname</th>
+    <th scope="col">Nachname</th>
+    <th scope="col">Strasse</th>
+    <th scope="col">PLZ</th>
+    <th scope="col">Ort</th>
+    <th scope="col">Telefon</th>
+  </tr>
+  </thead>
+  <tbody>
+
+ {% for row in result %}
+  <tr>
+    <th scope="row">{{ row[0] }}</th>
+    <td>{{ row[2] }}</td>
+    <td>{{ row[1] }}</td>
+    <td>{{ row[3] }}</td>
+    <td>{{ row[4] }}</td>
+    <td>{{ row[5] }}</td>
+    <td>{{ row[6] }}</td>
+  </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
+
+
 {% endblock %}
+
+<h2>nur der zweite Datensatz</h2>
+{# result[index-des-datensatzes][index-des-Attributs] #}
+<p>{{ result[1][2] }}</p>
+
+
+<h2>Ausgabe der Datenbank</h2>
+{% for element in result %}
+<p>Vorname: {{ element[2] }}, Nachname: {{ element[1] }}</p>
+{% endfor %}
