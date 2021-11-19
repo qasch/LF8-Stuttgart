@@ -5,6 +5,7 @@ import sqlite3
 # Flask Objekt erzeugen
 app = Flask(__name__)
 
+
 @app.route("/")
 def index():
     # Verbindung zur Datenbank herstellen
@@ -25,6 +26,11 @@ def index():
 @app.route("/test/<string:dest_url>/<from_url>")
 def test(dest_url, from_url):
     return render_template("test.html", dest_url=escape(dest_url), from_url=from_url)
+
+
+@app.route('/form/')
+def form():
+    return render_template("form.html")
 
 
 # 'Main Methode', Startpunkt der Applikation

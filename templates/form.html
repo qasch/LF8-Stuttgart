@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Form
+{% endblock %}
+
+{% block body %}
+<h1>Formular</h1>
+<form action="#">
+  <label for="vorname">Vorname</label>
+  <input type="text" name="vorname">
+
+  <label for="nachname">Nachname</label>
+  <input type="text" name="nachname">
+
+  <input type="button" value="submit">
+</form>
+{% endblock %}
