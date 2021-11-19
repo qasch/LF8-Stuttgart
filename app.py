@@ -33,11 +33,13 @@ def form():
     return render_template("form.html")
 
 
-@app.route('/results/')
+# TODO: Check methods
+@app.route('/results/', methods=['POST'])
 def results():
     # TODO: Logik, um Daten des Formulars auszulesen
-    vorname = request.args.get('vorname')
-    password = request.args.get('password')
+    #vorname = request.args.get('vorname')
+    vorname = request.form.get('vorname')
+    password = request.form.get('password')
 
     return render_template("results.html", vorname=vorname, password=password)
 
