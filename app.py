@@ -9,12 +9,12 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     # Verbindung zur Datenbank herstellen
-    connection = sqlite3.connect('db/schule.db')
+    connection = sqlite3.connect('db/flask.db')
     # Cursor erzeugen
     cursor = connection.cursor()
 
     # Cursor kann beliebige SQL Anweisungen ausführen
-    result = cursor.execute("SELECT * FROM Schueler").fetchall()
+    result = cursor.execute("SELECT * FROM person").fetchall()
 
     return render_template("index.html", result=result)
 
@@ -36,14 +36,42 @@ def form():
 # TODO: Check methods
 @app.route('/results/', methods=['POST'])
 def results():
-    # TODO: Logik, um Daten des Formulars auszulesen
     # mit request.args.get() erhält man nur GET Paramenter
     #vorname = request.args.get('vorname')
-    # mit request.form.get() erhält man die POST Daten 
+    # mit request.form.get() erhält man die POST Daten
     vorname = request.form.get('vorname')
-    password = request.form.get('password')
+    passwort = request.form.get('passwort')
+    # Prüfung, ob email eingetragen wurde, ansonten Fehler ausgeben
+    if request.form.get('email'):
+        email = request.form.get('email')
+    else:
+        email = "Not provided"
 
-    return render_template("results.html", vorname=vorname, password=password)
+    # Verbindung zur Datenbank herstellen
+    connection = sqlite3.connect('db/flask.db')
+    # Cursor erzeugen
+    cursor = connection.cursor()
+
+    # Cursor kann beliebige SQL Anweisungen ausführen
+    cursor.execute(
+        # F-String (Im Zusammenspiel mit SQL wäre Parameterization der bessere Weg)
+        f"""INSERT INTO person
+        (
+            vorname,
+            passwort,
+            email
+        )
+        VALUES (
+            '{vorname}',
+            '{passwort}',
+            '{email}'
+            )
+        """)
+
+    connection.commit()
+    connection.close()
+
+    return render_template("results.html", vorname=vorname, passwort=passwort)
 
 
 # 'Main Methode', Startpunkt der Applikation
