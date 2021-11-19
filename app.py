@@ -37,7 +37,9 @@ def form():
 @app.route('/results/', methods=['POST'])
 def results():
     # TODO: Logik, um Daten des Formulars auszulesen
+    # mit request.args.get() erhält man nur GET Paramenter
     #vorname = request.args.get('vorname')
+    # mit request.form.get() erhält man die POST Daten 
     vorname = request.form.get('vorname')
     password = request.form.get('password')
 
