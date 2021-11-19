@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from markupsafe import escape
 import sqlite3
 
@@ -31,6 +31,15 @@ def test(dest_url, from_url):
 @app.route('/form/')
 def form():
     return render_template("form.html")
+
+
+@app.route('/results/')
+def results():
+    # TODO: Logik, um Daten des Formulars auszulesen
+    vorname = request.args.get('vorname')
+    password = request.args.get('password')
+
+    return render_template("results.html", vorname=vorname, password=password)
 
 
 # 'Main Methode', Startpunkt der Applikation
